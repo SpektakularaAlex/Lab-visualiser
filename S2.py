@@ -1,0 +1,41 @@
+import tkinter as tki
+import s1s2_main
+import valve, pressures, commonPS2, arcfilament, magnet_pirani, koven, switchingmagnet, solidfilament, ammeter, intensities
+
+#TERM_SERV_ADDR_old = ('192.168.2.7', 3000) # ip_address and port_base
+TERM_SERV_ADDR = ('192.168.2.200', 10000) # ip_address and port_base
+
+
+the_items = [
+    #item                 , TERM_SERV_ADDR, N, 'name'            , ctrl, presets          , ctrl_coef, I_read_coef    , V_read_coef   , ctrl_min_max, I_read_min_max           , V_read_min_max           , ctrl_units, I_units, V_units, dctrl  , F_ctrl_coef, F_read_coef      , F_min_max , F_units      
+    (valve.Valve         , TERM_SERV_ADDR, 9, ('Gas','gas 3x')                                                                                                                                                                                                                                                                                                               , [  2, 830]), #gas
+    (pressures.Pressure1, ''            ,-1, ('Pressures','dbman_pressure'), 'S2'                                                                                                                                                                                                                                                                                                    , [  2, 780]), #pressure
+    (magnet_pirani.MagnetPirani, TERM_SERV_ADDR, 27, ('Magnet/Pirani/invert', 'Pressure/magnet'), 'I' , [('0.7', 0.7)], 3.03     , 8.5085e-5      , 0             , (0.5, 1.5, 2), (0.5, 1.5, 2)           , (50 , 90, 250           ), ('I','cu')      , 'A'    , '-'    , 0.01     , 0         , 0.00250862       , (8, 48, 70), ('p','mbar')                                                         , [890, 860, 2, 720]),     #solenoid/pirani
+    (solidfilament.SolidFilament, TERM_SERV_ADDR, 10, ('Solid filament','Solid filament'), 'I' , [          ], 0.056929   , 0.003275,            0.0002786 , None        , (0, 80, 90)               , (0   ,   3.5,  6)          , 'A'     , 'A'   , 'V'   , 0.10                                                                                                                    , [860, 760]), #Solid filament
+    #(arcfilament.ArcFilament, TERM_SERV_ADDR, 26, 'S2_Arc/Mesh filament/hide', 'I' , [               ], 5.0/100  , 3.0/0.719/32768.0, 0.007972     , (0, 65, 100), (1.3, 1.7, 3.0)          , (50 , 90, 250           ), '%'      , 'A'    , 'V'    , 0.5     , 5.0/50.0   , 30.0/0.594/32768.0, (0, 27, 30), ' '                                                           , [830, 660, -400, -400]), #arc/filament 5mA, 3kV
+    (arcfilament.ArcFilament, TERM_SERV_ADDR, 26, ('S2_Arc/Mesh filament','Arc/filament'), 'I' , [               ], 5.0/100  , 3.0/0.719/32768.0, 0.007972     , (0, 65, 100), (1.3, 1.7, 3.0)          , (50 , 90, 250           ), ('arc','%')      , 'A'    , 'V'    , 0.5     , 5.0/50.0   , 30.0/0.594/32768.0, (0, 27, 30), ('I',' ')                                                           , [830, 660, -400, -400]), #arc/filament 5mA, 3kV
+    (commonPS2.CommonPS  , TERM_SERV_ADDR, 14, ('Extraction','Extraction')      , 'V' , [('10', 10)     ], 5.0/20   , 0.000030523*5  , 0.00004352*20 , None        , (0, 2,  5*0+0.633*2)     , (9.5 , 10.5,  20*0+10*2 ), 'kV'     , 'mA'   , 'kV'   , 0.010                                                                                                                     , [800, 560]), #extraction 5mA, 20kV
+    (commonPS2.CommonPS  , TERM_SERV_ADDR, 11, ('Einzel lens','EinzelLens')     , 'V' , [('9.7' , 9.7)], 5.0/20   , 0.000030523*3.7, 0.00004381*20 , None        , (0, 1, 3.7*0+0.3*2)    , (0   ,   10,  20*0+9.5*2), 'kV'     , 'mA'   , 'kV'   , 0.010                                                                                                                         , [390, 560]), #einzel lens    3.7mA,  20kV for S2; 2.5mA, 30kV for S1
+    (koven.KOven         , TERM_SERV_ADDR, 15, ('KOven',' K oven')    , [('190',  190)], (0   , 195,   360) , (0   , 195,   360), (0, 100, 100), 1                                                                                                                                                                                                                             , [340, 460]), #Koven 5mA, 3kV
+    (commonPS2.CommonPS  , TERM_SERV_ADDR, 12, ('Neutral trap','Neutral trap')    , 'V' , [('1kV',  1)    ], 5.0/ 3   , 0.000044868*5  , 0.00004533* 3 , None        , (0, 2,   5*0+0.115*2)    , (0   ,    2,   3*0+1.1*2), 'kV'     , 'mA'   , 'kV'   , 0.005                                                                                                                     , [290, 360]), #neutral trap   5mA, 3kV
+    (commonPS2.CommonPS  , TERM_SERV_ADDR, 30, ('Pre-acc','Pre-acceleration')     , 'V' , [('40', 40)     ], 5.0/100  , 0.0000352*3    , 0.00004592*100, None        , (0, 1,  3*0+0.385*2)     , (39.0, 41.0, 100*0+40*2 ), 'kV'     , 'mA'   , 'kV'   , 0.010                                                                                                                     , [152, 260]), #pre-accel 3mA, 100kV
+    (commonPS2.CommonPS  , TERM_SERV_ADDR, 28, ('Grid lens','Grid')     , 'V' , [('0' , 0.0)], 5.0/1.0   , 2.529e-5, 2.529e-5 , (0.0, 0.1, 1), (0.0, 0.1, 1)    , (0.0   ,   0.1,  1), 'kV'     , 'mA'   , 'kV'   , 0.002                                                                                                                                                  , [102, 160]), #gridlens
+    (commonPS2.CommonPS  , TERM_SERV_ADDR, 29, ('Steerer S2','Steerer')     , 'I' , [('0.51' , 0.51)], 5.0/1.0   ,       0, 2.529e-5*0 , (0.4, 0.6, 1), (0.4, 0.6, 1)    , (0.4   ,   0.6,  1), ('U','kV')     , '-'   , '-'   , 0.002                                                                                                                                            , [ 52, 100]), #steerer 
+    (switchingmagnet.SwitchingMagnet, TERM_SERV_ADDR, 32, ('Sw magnet/sw magnet field/hide','Switching magnet'), 'I' , [('H', 4.7),('He', 9.4),('15N', 19.1)], 5/40.0     , 40/32768.0/1.168      , 27.52/32768.0             , (0, 30, 40), (0, 30, 40)           , (0 , 20, 35           ), 'A'      , 'A'    , 'V'    , 0.01     , 0         , 0.00250862       , (0, 9000, 9000), ('field','G')   , [  2,   2, -400, -400]), #sw magnet/field
+    (ammeter.Ammeter, 'usb', -1, ('Ammeter','Ammeter')        , 'I' , []               , 0         , 0.025       , 0             , None        , (0, 80, 90)               , (0   ,   0,  0)          , ''      , 'nA'   , ''      , 0                                                                                                                    , [860, 760]), #Ammeter
+    (intensities.Intensities, ''            ,-1, ('Intensities','Intensities')),
+    #(arcfilament.ArcFilament, TERM_SERV_ADDR, 8, ('S1_Arc/Filament/invert','Arc/filament'), 'I' , [               ], 5.0/100  , 8.379956e-05, 0.007972     , (0, 65, 100), (1.3, 1.7, 3.0)          , (50 , 90, 250           ), '%'      , 'A'    , 'V'    , 0.5     , 5.0/50.0   , 0.001256          , (0, 27, 30), ('I','A')                                                           , [830, 660, -400, -400]), #arc/filament 5mA, 3kV
+    
+    #(filament.Filament  , TERM_SERV_ADDR, 1, 'Filament' ),#   , ctrl, presets          , ctrl_coef, I_read_coef    , V_read_coef   , ctrl_min_max, I_read_min_max           , V_read_min_max           , ctrl_units, I_units, V_units, dctrl  , F_ctrl_coef, F_read_coef      , F_min_max , F_units      
+    #(commonPS.CommonPS  , TERM_SERV_ADDR, 2, 'Magnet'          , 'I', [('0.7', 0.7)             ], 1.0, 1.0, 1.0),
+    #(commonPS.CommonPS  , TERM_SERV_ADDR,10, 'GlassmanER15mA30kV', 'V', [('S1' , 3.2), ('S2', 4.8)], 0.2, 0.00045784, 0.001078, (0, 2, 15), (0, 17, 30), 'mA', 'kV'),       #15mA,  30kV
+    #(commonPS.CommonPS  , TERM_SERV_ADDR, 9, 'Steerer'         , 'V', [('S1' , 4.1), ('S2', 5.1)], 1.0, 1.0, 1.0),
+    #(valve.Valve        , '192.168.2.1', 22333-3000, 'Gas'    ),
+]
+
+if __name__ == '__main__':
+    root = tki.Tk()
+    root.title('S2 control')
+    root.geometry('1268x940')
+    app = s1s2_main.S1S2(the_items, 'S2', fancy_pos=False, pic='ugly.png')
+    root.mainloop()

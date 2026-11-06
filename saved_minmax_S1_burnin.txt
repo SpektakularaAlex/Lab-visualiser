@@ -1,0 +1,6 @@
+Pressure S1	0.0	6.6	10.0
+S1_Arc/Filament set value	0	65	100
+S1_Arc/Filament I	1.3	1.7	3.0
+S1_Arc/Filament V	50	90	250
+S1_Arc/Filament F	0	27	30
+S1_Arc/Filament F ctrl	0	27	30

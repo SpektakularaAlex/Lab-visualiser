@@ -1,0 +1,38 @@
+Pressures	5.4	5.6	10.0
+Magnet/Pirani/invert set value	0.35	1.5	2.0
+Magnet/Pirani/invert I	0.3	1.5	2.0
+Magnet/Pirani/invert F	1.0	1.4	2.0
+Solid filament set value	0.0	80.0	90.0
+Solid filament I	0.0	80.0	90.0
+Solid filament V	0.0	3.7	6.0
+S2_Arc/Mesh filament set value	0.0	70.0	100.0
+S2_Arc/Mesh filament I	1.1	1.65	3.0
+S2_Arc/Mesh filament V	50.0	150.0	250.0
+S2_Arc/Mesh filament F	0.0	27.0	30.0
+S2_Arc/Mesh filament F ctrl	0.0	27.0	30.0
+Extraction set value	9.5	10.5	20.0
+Extraction I	0.0	2.0	1.266
+Extraction V	9.5	10.5	20.0
+Einzel lens set value	0.0	10.0	19.0
+Einzel lens I	0.0	1.0	0.6
+Einzel lens V	0.0	10.0	19.0
+KOven set value	0.0	195.0	360.0
+KOven I	0.0	195.0	360.0
+KOven V	0.0	100.0	100.0
+Neutral trap set value	0.0	2.0	2.2
+Neutral trap I	0.0	2.0	0.4
+Neutral trap V	0.9	1.1	2.2
+Pre-acc set value	39.0	41.0	80.0
+Pre-acc I	0.0	1.0	0.77
+Pre-acc V	39.0	41.0	80.0
+Grid lens set value	0.0	0.1	1.0
+Grid lens I	0.0	0.1	1.0
+Grid lens V	0.0	0.1	1.0
+Steerer S2 set value	0.4	0.6	1.0
+Sw magnet/sw magnet field/hide set value	9.0	9.5	40.0
+Sw magnet/sw magnet field/hide I	8.8	9.5	40.0
+Sw magnet/sw magnet field/hide V	0.0	3.0	35.0
+Sw magnet/sw magnet field/hide F	0.0	9000.0	9000.0
+Ammeter set value	0.0	80.0	90.0
+Ammeter I	0.0	300.0	400.0
+intensities	0.0	1000.0	1000.0

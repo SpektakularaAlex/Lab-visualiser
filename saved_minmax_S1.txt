@@ -1,0 +1,31 @@
+Pressures	2.5	3.1	5.0
+Gas MFC set value	0.0	65.0	100.0
+Gas MFC I	0.0	65.0	100.0
+Gas MFC V	4.0	10.0	12.0
+Solenoid/Gas/invert set value	1.0	2.0	2.5
+Solenoid/Gas/invert I	1.3	1.7	3.0
+Solenoid/Gas/invert F ctrl	1.9	2.5	10.0
+S1_Arc/Filament/invert set value	0.0	65.0	100.0
+S1_Arc/Filament/invert I	0.9	1.3	3.0
+S1_Arc/Filament/invert V	50.0	90.0	250.0
+S1_Arc/Filament/invert F	0.0	27.0	30.0
+S1_Arc/Filament/invert F ctrl	0.0	27.0	30.0
+Extraction set value	13.5	14.5	20.0
+Extraction I	0.0	2.0	5.0
+Extraction V	13.5	14.5	20.0
+Einzel lens set value	0.0	10.9	19.0
+Einzel lens I	0.0	1.0	2.5
+Einzel lens V	0.0	10.9	19.0
+Pre-acc set value	39.0	41.0	100.0
+Pre-acc I	0.0	1.4	3.0
+Pre-acc V	39.0	41.0	100.0
+Steerer S1 set value	0.3	0.6	1.0
+Grid lens set value	0.0	0.1	1.0
+Grid lens I	0.0	0.1	1.0
+Grid lens V	0.0	0.1	1.0
+Sw magnet/sw magnet field/hide set value	0.0	30.0	40.0
+Sw magnet/sw magnet field/hide I	0.0	30.0	40.0
+Sw magnet/sw magnet field/hide V	0.0	20.0	35.0
+Sw magnet/sw magnet field/hide F	0.0	9000.0	9000.0
+Ammeter set value	0	80	90
+Ammeter I	0	80	90

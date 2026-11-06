@@ -1,0 +1,9 @@
+{
+    "enabled": true,
+    "base_dir": "/home/s1s2/Documents/duoplasmatron_logs",
+    "monthly_files": true,
+    "commit_every": 1,
+    "queue_size": 5000,
+    "print_every": 300,
+    "min_free_mb": 5000
+}

@@ -1,0 +1,15 @@
+k=1
+m=2
+
+def foo():
+    global k, m
+    k = 5
+    m = 5
+    
+def fff():
+    print(k, m)
+
+
+fff()
+foo()
+fff()

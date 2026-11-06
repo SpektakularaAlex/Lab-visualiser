@@ -1,0 +1,16 @@
+from S1S2 pc to local main pc:
+scp -r /home/s1s2/Documents/* csoperator@192.168.2.1:/home/csoperator/petko/S1S2/
+
+from local to remote mounted on main pc:
+su root
+\cp -rf /home/csoperator/petko/S1S2/* /mnt/Bronze/Tandem/Pelletron/backup/S1S2/
+exit
+
+
+
+
+from remote mounted to local main pc:
+\cp -rf /mnt/Bronze/Tandem/Pelletron/backup/S1S2/* /home/csoperator/petko/S1S2/
+
+from local main pc to S1S2 pc:
+scp -r /home/csoperator/petko/S1S2/* s1s2@192.168.2.200:/home/s1s2/Documents/ 
